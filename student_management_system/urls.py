@@ -21,7 +21,7 @@ from student_management_system import settings
 from student_management_app.HodViews import *
 from student_management_app.StaffViews import *
 from student_management_app.StudentViews import *
-
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -157,3 +157,5 @@ urlpatterns = [
     path('add_student_excel_dump',HodViews.add_student_excel_dump_view,name='add_student_excel_dump_view'),
     
 ]+static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)+static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)
+
+urlpatterns += staticfiles_urlpatterns()

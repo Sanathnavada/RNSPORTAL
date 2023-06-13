@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -26,7 +27,7 @@ SECRET_KEY = 'django-insecure-nll-7%t@=wd(g9v_-6p6uxa$xxz0d_6!+7sg%n=3-n$cx67r($
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['*']
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,"media")
@@ -84,22 +85,26 @@ WSGI_APPLICATION = 'student_management_system.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'student_management_system',
+#         'USER': 'root',
+#         'PASSWORD': 'sanath',
+#         'PORT':3306,
+#         'HOST':'localhost',
+        
+        
+#     }
+    
+    
+# }
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'student_management_system',
-        'USER': 'student_management_system',
-        'PASSWORD': 'student_management_password',
-        'PORT':3306,
-        'HOST':'localhost',
-        
-        
-    }
-    
-    
-}
-
-
+     'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
+         
+         
+     
+}     
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
@@ -137,7 +142,7 @@ USE_TZ = True
 STATIC_URL = 'static/'
 AUTH_USER_MODEL = "student_management_app.CustomUser"
 AUTHENTICATION_BACKENDS = ["student_management_app.EmailBackEnd.EmailBackEnd"]
-
+MEDIA_URL = 'media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
